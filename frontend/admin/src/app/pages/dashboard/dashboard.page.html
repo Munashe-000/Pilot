@@ -1,0 +1,168 @@
+<section class="dashboard">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Workflow command center</span>
+      <h1>Orchestrate approvals, SLAs, and escalations in one flow.</h1>
+      <p>
+        PilotFlow keeps every approval moving with real-time task routing, escalation rules,
+        and a complete audit trail. Built for teams who cannot afford stalled decisions.
+      </p>
+      <div class="hero-actions">
+        <button class="btn primary">Create workflow</button>
+        <button class="btn ghost">View playbook</button>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <span class="metric-label">Active workflows</span>
+          <span class="metric-value">128</span>
+          <span class="metric-note">+18% this week</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">On-time SLA</span>
+          <span class="metric-value">94.6%</span>
+          <span class="metric-note">Last 30 days</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Avg cycle time</span>
+          <span class="metric-value">1d 4h</span>
+          <span class="metric-note">Procurement flow</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Escalations</span>
+          <span class="metric-value">6</span>
+          <span class="metric-note">Awaiting review</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-header">
+        <div>
+          <h2>Live queue</h2>
+          <p>Real-time approvals across teams.</p>
+        </div>
+        <span class="pill">Signal streaming</span>
+      </div>
+      <div class="queue">
+        <div class="queue-item">
+          <div>
+            <span class="queue-title">Vendor onboarding</span>
+            <span class="queue-meta">Finance ? Step 3 of 5</span>
+          </div>
+          <span class="status warn">2h left</span>
+        </div>
+        <div class="queue-item">
+          <div>
+            <span class="queue-title">Access request: Analytics</span>
+            <span class="queue-meta">Security ? Step 1 of 3</span>
+          </div>
+          <span class="status ok">On track</span>
+        </div>
+        <div class="queue-item">
+          <div>
+            <span class="queue-title">Procurement: Cloud spend</span>
+            <span class="queue-meta">VP Approval ? Step 4 of 4</span>
+          </div>
+          <span class="status alert">Escalated</span>
+        </div>
+        <div class="queue-item">
+          <div>
+            <span class="queue-title">Contract renewal</span>
+            <span class="queue-meta">Legal ? Step 2 of 4</span>
+          </div>
+          <span class="status ok">On track</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card workflow-canvas">
+      <div class="card-header">
+        <div>
+          <h3>Workflow canvas</h3>
+          <p>Procurement approval with SLA checkpoints.</p>
+        </div>
+        <button class="btn tiny">Edit flow</button>
+      </div>
+      <div class="canvas">
+        <div class="canvas-step">
+          <span class="step-title">Submit request</span>
+          <span class="step-meta">Requester</span>
+        </div>
+        <div class="canvas-step">
+          <span class="step-title">Manager review</span>
+          <span class="step-meta">48h SLA</span>
+        </div>
+        <div class="canvas-step active">
+          <span class="step-title">Finance approval</span>
+          <span class="step-meta">24h SLA</span>
+        </div>
+        <div class="canvas-step">
+          <span class="step-title">Vendor setup</span>
+          <span class="step-meta">Ops</span>
+        </div>
+        <div class="canvas-step">
+          <span class="step-title">Complete</span>
+          <span class="step-meta">Audit locked</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>SLA pulse</h3>
+          <p>Escalations and overdue steps.</p>
+        </div>
+        <button class="btn tiny ghost">View alerts</button>
+      </div>
+      <div class="pulse">
+        <div class="pulse-row">
+          <span>Procurement: Cloud spend</span>
+          <span class="status alert">Overdue</span>
+        </div>
+        <div class="pulse-row">
+          <span>Security access review</span>
+          <span class="status warn">6h left</span>
+        </div>
+        <div class="pulse-row">
+          <span>Vendor onboarding</span>
+          <span class="status ok">On track</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3>Audit stream</h3>
+          <p>Immutable decision timeline.</p>
+        </div>
+        <button class="btn tiny ghost">Export</button>
+      </div>
+      <div class="audit">
+        <div class="audit-row">
+          <span class="audit-dot"></span>
+          <div>
+            <strong>Finance approved</strong>
+            <p>R. Peters ? 12 minutes ago</p>
+          </div>
+        </div>
+        <div class="audit-row">
+          <span class="audit-dot"></span>
+          <div>
+            <strong>Legal added a clause</strong>
+            <p>J. Nkosi ? 1 hour ago</p>
+          </div>
+        </div>
+        <div class="audit-row">
+          <span class="audit-dot"></span>
+          <div>
+            <strong>Manager escalated</strong>
+            <p>A. Dlamini ? 3 hours ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

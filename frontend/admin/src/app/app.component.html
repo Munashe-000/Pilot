@@ -1,0 +1,60 @@
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-dot"></span>
+      <div class="brand-copy">
+        <span class="brand-name">PilotFlow</span>
+        <span class="brand-sub">Workflow Orchestration</span>
+      </div>
+    </div>
+    <nav class="topnav">
+      <a href="#">Docs</a>
+      <a href="#">Security</a>
+      <a href="#">Pricing</a>
+      <a href="#">Status</a>
+    </nav>
+    <div class="top-actions">
+      <button class="btn ghost">Request demo</button>
+      <button class="btn primary">Launch console</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidenav">
+      <div class="tenant-card">
+        <div>
+          <span class="tenant-title">Amplifin Ops</span>
+          <span class="tenant-sub">Pretoria HQ</span>
+        </div>
+        <span class="pill">Live</span>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-label">Workspace</span>
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/workflows" routerLinkActive="active">Workflows</a>
+        <a routerLink="/tasks" routerLinkActive="active">Task Inbox</a>
+        <a routerLink="/audit" routerLinkActive="active">Audit</a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-label">Admin</span>
+        <a routerLink="/settings" routerLinkActive="active">Settings</a>
+        <a href="#">Integrations</a>
+        <a href="#">Teams</a>
+      </div>
+
+      <div class="sidenav-foot">
+        <div>
+          <span class="nav-label">On-call</span>
+          <span class="foot-text">Ops team monitoring SLAs</span>
+        </div>
+        <button class="btn tiny ghost">Open runbook</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
