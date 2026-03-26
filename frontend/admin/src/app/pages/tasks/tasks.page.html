@@ -1,10 +1,57 @@
 <section class="page-shell">
   <div class="page-header">
     <h1>Task Inbox</h1>
-    <p>Approve, reject, or escalate tasks assigned to you.</p>
+    <p>Review access requests routed to your role.</p>
   </div>
-  <div class="card">
-    <h3>Assigned tasks</h3>
-    <p>Live queue connected to real-time routing events.</p>
+
+  <div class="card filter-card">
+    <div>
+      <h3>Inbox filters</h3>
+      <p>Currently viewing Security tasks for tenant-demo.</p>
+    </div>
+    <div class="filters">
+      <div class="field">
+        <label>Assignee role</label>
+        <select [(ngModel)]="assigneeRole" (change)="loadTasks()">
+          <option value="Security">Security</option>
+          <option value="IT">IT</option>
+          <option value="Finance">Finance</option>
+        </select>
+      </div>
+      <button class="btn ghost" type="button" (click)="loadTasks()">Refresh</button>
+    </div>
+  </div>
+
+  <div class="card inbox-card">
+    <div class="inbox-header">
+      <div>
+        <h3>Assigned tasks</h3>
+        <p>Live queue connected to routing events.</p>
+      </div>
+      <span class="pill">{{ tasks.length }} active</span>
+    </div>
+
+    <div class="notice" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <div class="empty" *ngIf="!loading && tasks.length === 0 && !errorMessage">
+      No tasks found for this role yet.
+    </div>
+
+    <div class="loading" *ngIf="loading">Loading tasks...</div>
+
+    <div class="task-list" *ngIf="!loading && tasks.length">
+      <div class="task" *ngFor="let task of tasks">
+        <div>
+          <span class="task-title">{{ task.title }}</span>
+          <span class="task-meta">
+            {{ task.requesterName }} · {{ task.systemName }} · Due {{ task.dueAtUtc | date:'MMM d, HH:mm' }}
+          </span>
+        </div>
+        <div class="task-tags">
+          <span [class]="statusClass(task.status)">{{ task.status }}</span>
+          <span class="pill">{{ priorityLabel(task.priority) }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

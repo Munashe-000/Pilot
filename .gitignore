@@ -6,6 +6,10 @@
 # dotenv files
 .env
 
+# Local SDK/workaround folders
+.dotnet/
+.sdks/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -81,6 +85,11 @@ StyleCopReport.xml
 *.ilk
 *.meta
 *.obj
+*.dll
+*.exe
+*.deps.json
+*.runtimeconfig.json
+*.apphost
 *.iobj
 *.pch
 *.pdb

@@ -1,10 +1,95 @@
 <section class="page-shell">
   <div class="page-header">
-    <h1>Workflow Builder</h1>
-    <p>Design multi-step approval flows with SLA checkpoints.</p>
+    <h1>Access Request Intake</h1>
+    <p>Submit access requests for review and route them to Security.</p>
   </div>
-  <div class="card">
-    <h3>Templates</h3>
-    <p>Procurement Approval, Access Request, Vendor Onboarding.</p>
+
+  <div class="grid">
+    <form class="card form-card" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-grid">
+        <div class="field">
+          <label>Requester name</label>
+          <input type="text" formControlName="requesterName" placeholder="e.g. Refilwe Peters" />
+          <span class="error" *ngIf="isInvalid('requesterName')">Requester name is required.</span>
+        </div>
+        <div class="field">
+          <label>Requester email</label>
+          <input type="email" formControlName="requesterEmail" placeholder="refilwe@company.com" />
+          <span class="error" *ngIf="isInvalid('requesterEmail')">Valid email is required.</span>
+        </div>
+        <div class="field">
+          <label>System name</label>
+          <input type="text" formControlName="systemName" placeholder="Analytics Hub" />
+          <span class="error" *ngIf="isInvalid('systemName')">System name is required.</span>
+        </div>
+        <div class="field">
+          <label>Access level</label>
+          <select formControlName="accessLevel">
+            <option value="Read">Read</option>
+            <option value="Write">Write</option>
+            <option value="Admin">Admin</option>
+          </select>
+          <span class="error" *ngIf="isInvalid('accessLevel')">Access level is required.</span>
+        </div>
+        <div class="field">
+          <label>Manager name</label>
+          <input type="text" formControlName="managerName" placeholder="Sipho Dlamini" />
+          <span class="error" *ngIf="isInvalid('managerName')">Manager name is required.</span>
+        </div>
+        <div class="field">
+          <label>Tenant</label>
+          <input type="text" formControlName="tenantId" readonly />
+        </div>
+        <div class="field full">
+          <label>Reason</label>
+          <textarea rows="4" formControlName="reason" placeholder="Explain why access is needed."></textarea>
+          <span class="error" *ngIf="isInvalid('reason')">Reason is required.</span>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn primary" type="submit" [disabled]="submitting">
+          {{ submitting ? 'Submitting...' : 'Submit request' }}
+        </button>
+        <span class="status ok" *ngIf="result">Submitted</span>
+      </div>
+
+      <div class="notice" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="success" *ngIf="result">
+        <h4>Request created</h4>
+        <p>Request id: {{ result.requestId }}</p>
+        <p>Task id: {{ result.taskId }}</p>
+        <p>Status: {{ result.status }}</p>
+      </div>
+    </form>
+
+    <div class="card guide-card">
+      <h3>Review workflow</h3>
+      <p>Requests are routed to Security, tracked against SLA, and audited.</p>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span class="pill">1</span>
+          <div>
+            <strong>Submission captured</strong>
+            <p>Request is logged and stamped with a tenant id.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="pill">2</span>
+          <div>
+            <strong>Security task created</strong>
+            <p>Inbox task is assigned to the Security role.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="pill">3</span>
+          <div>
+            <strong>Decision recorded</strong>
+            <p>Approval, rejection, or escalation will be audited.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
