@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320" height="120" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a7c7e"/>
+      <stop offset="50%" stop-color="#1eb7a6"/>
+      <stop offset="100%" stop-color="#48d9c0"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#072f46" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#072f46" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="120" rx="16" fill="url(#g2)"/>
+  <path d="M30 90 C 80 10, 160 10, 210 90" stroke="url(#g)" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="110" r="18" fill="#feffef" opacity="0.9"/>
+  <circle cx="200" cy="110" r="12" fill="#0a7c7e"/>
+  <text x="30" y="75" font-family="Space Grotesk, system-ui, sans-serif" font-size="36" letter-spacing="2" fill="#feffef">
+    Pilot<span fill="#1eb7a6">Flow</span>
+  </text>
+  <text x="30" y="105" font-family="Space Grotesk, system-ui, sans-serif" font-size="12" fill="#c6dae4">
+    Workflow orchestration & approvals
+  </text>
+</svg>

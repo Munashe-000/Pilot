@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PilotFlow.Application\PilotFlow.Application.csproj" />
     <ProjectReference Include="..\PilotFlow.Infrastructure\PilotFlow.Infrastructure.csproj" />
     <ProjectReference Include="..\PilotFlow.Contracts\PilotFlow.Contracts.csproj" />
