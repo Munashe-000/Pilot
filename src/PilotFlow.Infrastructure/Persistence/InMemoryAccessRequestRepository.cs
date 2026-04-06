@@ -29,4 +29,11 @@ public sealed class InMemoryAccessRequestRepository : IAccessRequestRepository
 
         return Task.FromResult<AccessRequest?>(null);
     }
+
+    public Task UpdateAsync(AccessRequest request, CancellationToken cancellationToken)
+    {
+        var bucket = _store.AccessRequests.GetOrAdd(request.TenantId, _ => new());
+        bucket[request.Id] = request;
+        return Task.CompletedTask;
+    }
 }
