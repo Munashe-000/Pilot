@@ -1,6 +1,6 @@
 # PilotFlow
 
-A platform used for workflow orchestration and approvals which focuses on real‑time task routing, SLA escalations, and audit tracking. Built with .NET 8 (C#), AWS serverless, and Angular.
+A platform used for workflow orchestration and approvals, which focuses on real‑time task routing, SLA escalations, and audit tracking. Built with .NET 8 (C#), AWS serverless, and Angular. This project aims to showcase my skills in building scalable and secure backends while still having an eye for style and User Experience. I use AWS services to extend the capability of our app to ensure scalability and availability. 
 
 ## What this repo contains
 - Clean Architecture backend with CQRS/MediatR
