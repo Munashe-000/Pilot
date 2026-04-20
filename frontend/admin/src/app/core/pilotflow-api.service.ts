@@ -4,6 +4,9 @@ import { API_BASE_URL } from './api.constants';
 import {
   CreateAccessRequestRequest,
   CreateAccessRequestResponse,
+  DecideTaskRequest,
+  DecideTaskResponse,
+  AuditTimelineItemResponse,
   TaskInboxItemResponse
 } from './api.models';
 
@@ -23,6 +26,25 @@ export class PilotFlowApiService {
       `${API_BASE_URL}/api/tasks/inbox`,
       {
         params: { tenantId, assigneeRole }
+      }
+    );
+  }
+
+  decideTask(taskId: string, payload: DecideTaskRequest) {
+    return this.http.post<DecideTaskResponse>(
+      `${API_BASE_URL}/api/tasks/${taskId}/decision`,
+      payload
+    );
+  }
+
+  getAuditTimeline(tenantId: string, limit = 25) {
+    return this.http.get<AuditTimelineItemResponse[]>(
+      `${API_BASE_URL}/api/audit/timeline`,
+      {
+        params: {
+          tenantId,
+          limit
+        }
       }
     );
   }

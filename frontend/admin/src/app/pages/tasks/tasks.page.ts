@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PilotFlowApiService } from '../../core/pilotflow-api.service';
-import { TaskInboxItemResponse } from '../../core/api.models';
+import { DecideTaskRequest, TaskInboxItemResponse } from '../../core/api.models';
 
 @Component({
   selector: 'app-tasks-page',
@@ -16,10 +16,15 @@ export class TasksPageComponent {
 
   tenantId = 'tenant-demo';
   assigneeRole = 'Security';
+  decidedBy = 'Security Lead';
 
   tasks: TaskInboxItemResponse[] = [];
   loading = false;
   errorMessage = '';
+  decisionMessage = '';
+  decisionError = '';
+  decisionNotes: Record<string, string> = {};
+  decisionInFlight: Record<string, boolean> = {};
 
   ngOnInit() {
     this.loadTasks();
@@ -63,5 +68,40 @@ export class TasksPageComponent {
       default:
         return 'Normal priority';
     }
+  }
+
+  canDecide(task: TaskInboxItemResponse) {
+    return task.status !== 'Completed';
+  }
+
+  submitDecision(task: TaskInboxItemResponse, decision: 'Approved' | 'Rejected') {
+    if (!this.canDecide(task) || this.decisionInFlight[task.id]) {
+      return;
+    }
+
+    this.decisionMessage = '';
+    this.decisionError = '';
+    this.decisionInFlight[task.id] = true;
+
+    const note = this.decisionNotes[task.id]?.trim();
+    const payload: DecideTaskRequest = {
+      tenantId: this.tenantId,
+      decision,
+      decidedBy: this.decidedBy,
+      comment: note ? note : undefined
+    };
+
+    this.api.decideTask(task.id, payload).subscribe({
+      next: () => {
+        this.decisionMessage = `${decision} recorded for ${task.requesterName}.`;
+        this.decisionNotes[task.id] = '';
+        this.loadTasks();
+        this.decisionInFlight[task.id] = false;
+      },
+      error: (error) => {
+        this.decisionError = error?.error?.message || 'Unable to record decision.';
+        this.decisionInFlight[task.id] = false;
+      }
+    });
   }
 }

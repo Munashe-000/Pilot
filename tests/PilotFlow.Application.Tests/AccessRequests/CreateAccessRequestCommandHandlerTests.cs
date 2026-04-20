@@ -51,6 +51,12 @@ public sealed class CreateAccessRequestCommandHandlerTests
         {
             return Task.FromResult(LastAdded);
         }
+
+        public Task UpdateAsync(AccessRequest request, CancellationToken cancellationToken)
+        {
+            LastAdded = request;
+            return Task.CompletedTask;
+        }
     }
 
     private sealed class FakeTaskAssignmentRepository : ITaskAssignmentRepository
@@ -60,6 +66,27 @@ public sealed class CreateAccessRequestCommandHandlerTests
         public Task AddAsync(TaskAssignment task, CancellationToken cancellationToken)
         {
             Tasks.Add(task);
+            return Task.CompletedTask;
+        }
+
+        public Task<TaskAssignment?> GetByIdAsync(string tenantId, Guid id, CancellationToken cancellationToken)
+        {
+            var task = Tasks.FirstOrDefault(item => item.TenantId == tenantId && item.Id == id);
+            return Task.FromResult<TaskAssignment?>(task);
+        }
+
+        public Task UpdateAsync(TaskAssignment task, CancellationToken cancellationToken)
+        {
+            var index = Tasks.FindIndex(item => item.Id == task.Id);
+            if (index >= 0)
+            {
+                Tasks[index] = task;
+            }
+            else
+            {
+                Tasks.Add(task);
+            }
+
             return Task.CompletedTask;
         }
 

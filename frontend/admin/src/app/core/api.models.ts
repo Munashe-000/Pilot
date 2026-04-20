@@ -27,3 +27,29 @@ export interface TaskInboxItemResponse {
   createdAtUtc: string;
   dueAtUtc: string;
 }
+
+export interface DecideTaskRequest {
+  tenantId: string;
+  decision: string;
+  decidedBy: string;
+  comment?: string;
+}
+
+export interface DecideTaskResponse {
+  taskId: string;
+  requestId: string;
+  taskStatus: string;
+  requestStatus: string;
+  decision: string;
+  decidedAtUtc: string;
+}
+
+export interface AuditTimelineItemResponse {
+  id: string;
+  taskId: string;
+  requestId: string;
+  decision: string;
+  actor: string;
+  comment?: string;
+  occurredAtUtc: string;
+}

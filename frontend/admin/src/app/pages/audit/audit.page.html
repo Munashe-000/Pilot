@@ -1,10 +1,42 @@
-<section class="page-shell">
+﻿<section class="page-shell">
   <div class="page-header">
     <h1>Audit Timeline</h1>
     <p>Immutable decision history with export-ready logs.</p>
   </div>
-  <div class="card">
-    <h3>Recent decisions</h3>
-    <p>All actions are timestamped and traceable.</p>
+
+  <div class="card timeline-card">
+    <div class="timeline-header">
+      <div>
+        <h3>Recent decisions</h3>
+        <p>All actions are timestamped and traceable.</p>
+      </div>
+      <button class="btn ghost tiny" type="button" (click)="loadTimeline()">Refresh</button>
+    </div>
+
+    <div class="notice" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="loading" *ngIf="loading">Loading timeline...</div>
+    <div class="empty" *ngIf="!loading && events.length === 0 && !errorMessage">
+      No audit events yet.
+    </div>
+
+    <div class="timeline" *ngIf="!loading && events.length">
+      <div class="timeline-item" *ngFor="let event of events">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">
+            <span class="pill">{{ event.decision }}</span>
+            <span class="timeline-meta">
+              {{ event.actor }} - {{ event.occurredAtUtc | date:'MMM d, HH:mm' }}
+            </span>
+          </div>
+          <div class="timeline-details">
+            Request {{ event.requestId }} - Task {{ event.taskId }}
+          </div>
+          <div class="timeline-comment" *ngIf="event.comment">
+            {{ event.comment }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

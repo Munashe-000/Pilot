@@ -20,6 +20,23 @@ public sealed class InMemoryTaskAssignmentRepository : ITaskAssignmentRepository
         return Task.CompletedTask;
     }
 
+    public Task<TaskAssignment?> GetByIdAsync(string tenantId, Guid id, CancellationToken cancellationToken)
+    {
+        if (_store.TaskAssignments.TryGetValue(tenantId, out var bucket) && bucket.TryGetValue(id, out var task))
+        {
+            return Task.FromResult<TaskAssignment?>(task);
+        }
+
+        return Task.FromResult<TaskAssignment?>(null);
+    }
+
+    public Task UpdateAsync(TaskAssignment task, CancellationToken cancellationToken)
+    {
+        var bucket = _store.TaskAssignments.GetOrAdd(task.TenantId, _ => new());
+        bucket[task.Id] = task;
+        return Task.CompletedTask;
+    }
+
     public Task<IReadOnlyList<TaskAssignment>> ListByAssigneeRoleAsync(
         string tenantId,
         string assigneeRole,

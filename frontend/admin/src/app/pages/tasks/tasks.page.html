@@ -1,4 +1,4 @@
-<section class="page-shell">
+ï»¿<section class="page-shell">
   <div class="page-header">
     <h1>Task Inbox</h1>
     <p>Review access requests routed to your role.</p>
@@ -10,6 +10,10 @@
       <p>Currently viewing Security tasks for tenant-demo.</p>
     </div>
     <div class="filters">
+      <div class="field">
+        <label>Decision by</label>
+        <input [(ngModel)]="decidedBy" placeholder="Name or role" />
+      </div>
       <div class="field">
         <label>Assignee role</label>
         <select [(ngModel)]="assigneeRole" (change)="loadTasks()">
@@ -32,6 +36,8 @@
     </div>
 
     <div class="notice" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="notice success" *ngIf="decisionMessage">{{ decisionMessage }}</div>
+    <div class="notice" *ngIf="decisionError">{{ decisionError }}</div>
 
     <div class="empty" *ngIf="!loading && tasks.length === 0 && !errorMessage">
       No tasks found for this role yet.
@@ -41,15 +47,44 @@
 
     <div class="task-list" *ngIf="!loading && tasks.length">
       <div class="task" *ngFor="let task of tasks">
-        <div>
+        <div class="task-main">
           <span class="task-title">{{ task.title }}</span>
           <span class="task-meta">
-            {{ task.requesterName }} · {{ task.systemName }} · Due {{ task.dueAtUtc | date:'MMM d, HH:mm' }}
+            {{ task.requesterName }} &middot; {{ task.systemName }} &middot; Due {{ task.dueAtUtc | date:'MMM d, HH:mm' }}
           </span>
         </div>
-        <div class="task-tags">
-          <span [class]="statusClass(task.status)">{{ task.status }}</span>
-          <span class="pill">{{ priorityLabel(task.priority) }}</span>
+        <div class="task-actions">
+          <div class="task-tags">
+            <span [class]="statusClass(task.status)">{{ task.status }}</span>
+            <span class="pill">{{ priorityLabel(task.priority) }}</span>
+          </div>
+          <div class="decision-area" *ngIf="canDecide(task)">
+            <input
+              [(ngModel)]="decisionNotes[task.id]"
+              placeholder="Decision note (optional)"
+            />
+            <div class="decision-buttons">
+              <button
+                class="btn approve tiny"
+                type="button"
+                [disabled]="decisionInFlight[task.id]"
+                (click)="submitDecision(task, 'Approved')"
+              >
+                Approve
+              </button>
+              <button
+                class="btn reject tiny"
+                type="button"
+                [disabled]="decisionInFlight[task.id]"
+                (click)="submitDecision(task, 'Rejected')"
+              >
+                Reject
+              </button>
+            </div>
+          </div>
+          <div class="decision-locked" *ngIf="!canDecide(task)">
+            <span class="pill muted">Decision recorded</span>
+          </div>
         </div>
       </div>
     </div>

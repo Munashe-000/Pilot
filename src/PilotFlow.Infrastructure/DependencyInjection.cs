@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddSingleton<InMemoryDataStore>();
         services.AddSingleton<IAccessRequestRepository, InMemoryAccessRequestRepository>();
         services.AddSingleton<ITaskAssignmentRepository, InMemoryTaskAssignmentRepository>();
+        services.AddSingleton<IAuditEventRepository, InMemoryAuditEventRepository>();
         services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
 
         return services;

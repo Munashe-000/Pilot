@@ -6,4 +6,5 @@ public interface IAccessRequestRepository
 {
     Task AddAsync(AccessRequest request, CancellationToken cancellationToken);
     Task<AccessRequest?> GetByIdAsync(string tenantId, Guid id, CancellationToken cancellationToken);
+    Task UpdateAsync(AccessRequest request, CancellationToken cancellationToken);
 }

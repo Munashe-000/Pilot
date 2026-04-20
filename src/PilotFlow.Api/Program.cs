@@ -29,5 +29,8 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapAccessRequestEndpoints();
 app.MapTaskEndpoints();
+app.MapAuditEndpoints();
 
 app.Run();
+
+public partial class Program;
