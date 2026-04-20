@@ -12,13 +12,13 @@ A platform used for workflow orchestration and approvals, which focuses on real�
 Feature 1 implemented, reviewed by AI agent and end-to-end tested.
 Feature 2 implemented, reviewed by AI agent and end-to-end tested.
 
-**Feature 1**
+**Feature 1**  ✅
   - smooth user interface with UX in mind
   - submit an access request                                                                                                                                                                                                                                                        
   - create the related security task                                                                                                                                                                                                                                                
   - show that task in the task inbox  
   
-**Feature 2**
+**Feature 2**  ✅
   - take the created task                                                                                                                                                                                                                                                           
   - approve or reject it                                                                                                                                                                                                                                                            
   - update the request status                                                                                                                                                                                                                                                       
