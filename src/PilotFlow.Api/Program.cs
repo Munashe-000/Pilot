@@ -32,3 +32,5 @@ app.MapTaskEndpoints();
 app.MapAuditEndpoints();
 
 app.Run();
+
+public partial class Program;
