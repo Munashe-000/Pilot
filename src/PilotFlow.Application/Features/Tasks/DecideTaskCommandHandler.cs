@@ -1,6 +1,7 @@
 using MediatR;
 using PilotFlow.Application.Common.Interfaces;
 using PilotFlow.Domain.Entities;
+using DomainTaskStatus = PilotFlow.Domain.Entities.TaskStatus;
 
 namespace PilotFlow.Application.Features.Tasks;
 
@@ -48,7 +49,7 @@ public sealed class DecideTaskCommandHandler
             return TaskDecisionResult.NotFound();
         }
 
-        if (task.Status == TaskStatus.Completed &&
+        if (task.Status == DomainTaskStatus.Completed &&
             (accessRequest.Status == AccessRequestStatus.Approved ||
              accessRequest.Status == AccessRequestStatus.Rejected))
         {

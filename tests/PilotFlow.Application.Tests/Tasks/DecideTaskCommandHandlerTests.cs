@@ -1,6 +1,7 @@
 using PilotFlow.Application.Common.Interfaces;
 using PilotFlow.Application.Features.Tasks;
 using PilotFlow.Domain.Entities;
+using DomainTaskStatus = PilotFlow.Domain.Entities.TaskStatus;
 
 namespace PilotFlow.Application.Tests.Tasks;
 
@@ -52,7 +53,7 @@ public sealed class DecideTaskCommandHandlerTests
         var result = await handler.Handle(command, CancellationToken.None);
 
         Assert.Equal(TaskDecisionOutcome.Success, result.Outcome);
-        Assert.Equal(TaskStatus.Completed, task.Status);
+        Assert.Equal(DomainTaskStatus.Completed, task.Status);
         Assert.Equal(AccessRequestStatus.Approved, accessRequest.Status);
         Assert.Single(auditRepository.Events);
 
